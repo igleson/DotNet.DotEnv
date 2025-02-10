@@ -153,8 +153,9 @@ public class EnvVarGenerator : IIncrementalGenerator
     private static bool PropertyOnlyHasGetAccessor(PropertyDeclarationSyntax property)
     {
         var propType = property.Type.ToString().ToLower();
-        return SupportedPropertiesTypes.Contains(propType) && property.AccessorList?.Accessors.Count == 1
-                                                           && property.AccessorList.Accessors.First().Kind() == SyntaxKind.GetAccessorDeclaration;
+        return SupportedPropertiesTypes.Contains(propType)
+               && property.AccessorList?.Accessors.Count == 1
+               && property.AccessorList.Accessors.First().Kind() == SyntaxKind.GetAccessorDeclaration;
     }
 
     private static string? GenerateValueFor(PropertyDeclarationSyntax property, string stringfiedValue)

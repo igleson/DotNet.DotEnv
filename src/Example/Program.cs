@@ -1,4 +1,5 @@
 ﻿using Example;
+using AnotherEnvVars = Example.RandomDir.AnotherEnvVars;
 
 Console.WriteLine(EnvVars.BoolVar);
 Console.WriteLine(EnvVars.DoubleVar);
