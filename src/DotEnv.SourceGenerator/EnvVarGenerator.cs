@@ -167,7 +167,7 @@ public class EnvVarGenerator : IIncrementalGenerator
             "double" => double.TryParse(stringfiedValue, out var d) ? $"{d}d" : null,
             "float" => float.TryParse(stringfiedValue, out var f) ? $"{f}f" : null,
             "int" => int.TryParse(stringfiedValue, out _) ? stringfiedValue : null,
-            "long" => long.TryParse(stringfiedValue, out var l) ? $"{l}l" : null,
+            "long" => long.TryParse(stringfiedValue, out var l) ? $"{l}L" : null,
             _ => null
         };
     }

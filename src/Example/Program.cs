@@ -1,14 +1,10 @@
-﻿using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+﻿using Example;
 
-var tree = CSharpSyntaxTree.ParseText(@"
- public static partial class EnvVars
-{
-    public static  string SqlConnectionString { get; }
-}");
+Console.WriteLine(EnvVars.BoolVar);
+Console.WriteLine(EnvVars.DoubleVar);
+Console.WriteLine(EnvVars.IntVar);
 
-var compilation = CSharpCompilation.Create("MyCompilation", syntaxTrees: [tree]);
-
-var model = compilation.GetSemanticModel(tree);
-
-var prop = tree.GetRoot().DescendantNodes().OfType<PropertyDeclarationSyntax>().Single();
+Console.WriteLine(AnotherEnvVars.FloatVar);
+Console.WriteLine(AnotherEnvVars.DecimalVar);
+Console.WriteLine(AnotherEnvVars.LongVar);
+Console.WriteLine(AnotherEnvVars.StringVar);
