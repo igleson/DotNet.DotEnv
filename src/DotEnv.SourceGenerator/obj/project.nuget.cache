@@ -1,0 +1,51 @@
+{
+  "version": 2,
+  "dgSpecHash": "oYfCkhfZBvA=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\VTEX\\repositories\\DotNet.DotEnv\\src\\DotEnv.SourceGenerator\\DotEnv.SourceGenerator.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\VTEX\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\3.11.0\\microsoft.codeanalysis.analyzers.3.11.0.nupkg.sha512",
+    "C:\\Users\\VTEX\\.nuget\\packages\\microsoft.codeanalysis.common\\4.12.0\\microsoft.codeanalysis.common.4.12.0.nupkg.sha512",
+    "C:\\Users\\VTEX\\.nuget\\packages\\microsoft.codeanalysis.csharp\\4.12.0\\microsoft.codeanalysis.csharp.4.12.0.nupkg.sha512",
+    "C:\\Users\\VTEX\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\VTEX\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\VTEX\\.nuget\\packages\\polysharp\\1.15.0\\polysharp.1.15.0.nupkg.sha512",
+    "C:\\Users\\VTEX\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
+    "C:\\Users\\VTEX\\.nuget\\packages\\system.collections.immutable\\8.0.0\\system.collections.immutable.8.0.0.nupkg.sha512",
+    "C:\\Users\\VTEX\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512",
+    "C:\\Users\\VTEX\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "C:\\Users\\VTEX\\.nuget\\packages\\system.reflection.metadata\\8.0.0\\system.reflection.metadata.8.0.0.nupkg.sha512",
+    "C:\\Users\\VTEX\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\VTEX\\.nuget\\packages\\system.text.encoding.codepages\\7.0.0\\system.text.encoding.codepages.7.0.0.nupkg.sha512",
+    "C:\\Users\\VTEX\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1801",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Unable to load the service index for source https://main-053131491888.d.codeartifact.us-east-1.amazonaws.com/nuget/nuget/v3/index.json.",
+      "libraryId": "Microsoft.CodeAnalysis.Analyzers"
+    },
+    {
+      "code": "NU1801",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Unable to load the service index for source https://main-053131491888.d.codeartifact.us-east-1.amazonaws.com/nuget/nuget/v3/index.json.",
+      "libraryId": "Microsoft.CodeAnalysis.CSharp"
+    },
+    {
+      "code": "NU1801",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Unable to load the service index for source https://main-053131491888.d.codeartifact.us-east-1.amazonaws.com/nuget/nuget/v3/index.json.",
+      "libraryId": "PolySharp"
+    },
+    {
+      "code": "NU1900",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://main-053131491888.d.codeartifact.us-east-1.amazonaws.com/nuget/nuget/v3/index.json."
+    }
+  ]
+}
