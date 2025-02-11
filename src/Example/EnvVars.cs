@@ -1,4 +1,3 @@
-using DotEnv;
 using DotEnv.SourceGenerator;
 
 namespace Example;
