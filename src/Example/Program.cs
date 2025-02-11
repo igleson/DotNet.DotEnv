@@ -9,7 +9,3 @@ Console.WriteLine(AnotherEnvVars.FloatVar);
 Console.WriteLine(AnotherEnvVars.DecimalVar);
 Console.WriteLine(AnotherEnvVars.LongVar);
 Console.WriteLine(AnotherEnvVars.StringVar);
-
-var a = Environment.GetEnvironmentVariable("uiklajsd");
-
-Console.WriteLine(a == null);
