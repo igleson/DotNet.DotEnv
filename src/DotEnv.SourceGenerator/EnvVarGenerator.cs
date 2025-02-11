@@ -90,7 +90,7 @@ public class EnvVarGenerator : IIncrementalGenerator
                             if (!dict.TryGetValue(prop.Identifier.ToString(), out var stringfiedValue))
                             {
 #pragma warning disable RS1035
-                                stringfiedValue = Environment.GetEnvironmentVariable(prop.Identifier.ToString());
+                                stringfiedValue = Environment.GetEnvironmentVariable(ToMacroCase(prop.Identifier.ToString()));
 #pragma warning restore RS1035
                             }
 
@@ -177,6 +177,54 @@ public class EnvVarGenerator : IIncrementalGenerator
                && property.AccessorList.Accessors.First().Kind() == SyntaxKind.GetAccessorDeclaration;
     }
 
+    public static string ToMacroCase(string value)
+    {
+        var newIndex = 0;
+        var insertSeparator = true;
+        var isFirstCharacter = true;
+        var current = UnicodeCategory.OtherSymbol;
+        var newString = new char[value.Length + CalculateSpanSizeForKebabOrSnakeCase(value)];
+        foreach (var c in value)
+        {
+            var previous = current;
+            current = char.GetUnicodeCategory(c);
+            insertSeparator = (previous != current && (current is UnicodeCategory.UppercaseLetter || current is UnicodeCategory.DecimalDigitNumber)) || insertSeparator;
+            if (IsSpecialCharacter(current)) continue;
+            if (insertSeparator && !isFirstCharacter)
+            {
+                newString[newIndex] = '_';
+                newIndex++;
+            }
+            newString[newIndex] = char.ToUpperInvariant(c);
+            isFirstCharacter = false;
+            insertSeparator = false;
+            newIndex++;
+        }
+        return new string(newString);
+    }
+    
+    private static int CalculateSpanSizeForKebabOrSnakeCase(string text)
+    {
+        var previous = char.GetUnicodeCategory(text[0]);
+        var skips = IsSpecialCharacter(previous) ? 1 : 0;
+        var divs = 0;
+        for (var i = 1; i < text.Length; i++)
+        {
+            var current = char.GetUnicodeCategory(text[i]);
+            skips += IsSpecialCharacter(current) ? 1 : 0;
+            divs += previous != current && current is UnicodeCategory.UppercaseLetter or UnicodeCategory.DecimalDigitNumber ? 1 : 0;
+            previous = current;
+        }
+        return divs - skips;
+    }
+    
+    private static bool IsSpecialCharacter(UnicodeCategory category)
+    {
+        return category is not UnicodeCategory.UppercaseLetter
+            and not UnicodeCategory.LowercaseLetter
+            and not UnicodeCategory.DecimalDigitNumber;
+    }
+    
     private static (string? value, string? comment) GenerateValueFor(PropertyDeclarationSyntax property, string? stringfiedValue)
     {
         if (string.IsNullOrEmpty(stringfiedValue))
