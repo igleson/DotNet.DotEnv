@@ -16,8 +16,4 @@
         </PackageReference>
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="*" />
     </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\DotEnv\DotEnv.csproj" />
-    </ItemGroup>
 </Project>

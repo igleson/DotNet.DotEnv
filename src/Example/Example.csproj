@@ -8,8 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\DotEnv\DotEnv.csproj"/>
-        <ProjectReference Include="..\DotEnv.SourceGenerator\DotEnv.SourceGenerator.csproj" ReferenceOutputAssembly="false" OutputItemType="Analyzer"/>
+        <ProjectReference Include="..\DotEnv.SourceGenerator\DotEnv.SourceGenerator.csproj" OutputItemType="Analyzer"/>
     </ItemGroup>
 
     <ItemGroup>
