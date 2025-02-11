@@ -13,8 +13,8 @@
         <Version>0.0.1</Version>
         <Autho>https://github.com/igleson</Autho>
         <Description>Supports for a strongly type biding of .env files as static classes</Description>
-        <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile> 
+        <PackageLicenseFile>LICENSE</PackageLicenseFile> 
     </PropertyGroup>
 
     <ItemGroup>
