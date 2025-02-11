@@ -43,7 +43,6 @@ public class EnvVarGenerator : IIncrementalGenerator
         (ImmutableArray<AdditionalText> DotEnvFileNode, ImmutableArray<ClassDeclarationSyntax> DotEnvClassNode) node,
         SourceProductionContext context)
     {
-        if (node.DotEnvFileNode.IsEmpty) return;
         if (node.DotEnvClassNode.IsEmpty) return;
 
         var fileTexts = node.DotEnvFileNode

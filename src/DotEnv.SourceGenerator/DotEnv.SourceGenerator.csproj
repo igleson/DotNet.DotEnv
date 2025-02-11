@@ -10,7 +10,7 @@
         <PackageId>DotEnv.DotNet</PackageId>
         <PackageProjectUrl>https://github.com/igleson/DotNet.DotEnv</PackageProjectUrl>
         <PackageProjectUrl>https://github.com/igleson/DotNet.DotEnv</PackageProjectUrl>
-        <Version>0.0.5</Version>
+        <Version>0.0.6</Version>
         <Autho>https://github.com/igleson</Autho>
         <Description>Supports for a strongly type biding of .env files as static classes</Description>
         <PackageReadmeFile>README.md</PackageReadmeFile> 
