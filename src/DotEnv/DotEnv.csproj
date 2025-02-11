@@ -6,4 +6,12 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <PackageId>DotNet.DotEnv</PackageId>
+        <Version>0.0.1</Version>
+        <Description>Adds support for a strongly types binding of .env files</Description>
+        <Authors>https://github.com/igleson</Authors>
+        <RepositoryUrl>https://github.com/igleson/DotNet.DotEnv</RepositoryUrl>
+    </PropertyGroup>
+
 </Project>

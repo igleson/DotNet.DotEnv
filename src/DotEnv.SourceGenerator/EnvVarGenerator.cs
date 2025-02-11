@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Globalization;
@@ -79,16 +80,34 @@ public class EnvVarGenerator : IIncrementalGenerator
                 .Where(property => property.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.PublicKeyword)))
                 .Where(property => property.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.StaticKeyword)))
                 .Where(PropertyOnlyHasGetAccessor)
-                .Where(prop => dict.ContainsKey(prop.Identifier.ToString()))
                 .ToList();
 
             var propertiesCode =
-                string.Join("\n\t",
+                string.Join("\n\n\t",
                     propertiesDeclarations
                         .Select(prop =>
                         {
-                            var propValue = GenerateValueFor(prop, dict[prop.Identifier.ToString()]);
-                            return propValue is null ? null : $"public static partial {prop.Type} {prop.Identifier} => {propValue};";
+                            if (!dict.TryGetValue(prop.Identifier.ToString(), out var stringfiedValue))
+                            {
+#pragma warning disable RS1035
+                                stringfiedValue = Environment.GetEnvironmentVariable(prop.Identifier.ToString());
+#pragma warning restore RS1035
+                            }
+
+                            var (propValue, comment) = GenerateValueFor(prop, stringfiedValue);
+
+
+                            var releasePropValue = propValue ?? $"default; {comment}";
+
+                            if (propValue is not null) return $"public static partial {prop.Type} {prop.Identifier} => {propValue};";
+
+                            return $"""
+                                    #if DEBUG
+                                        {comment}
+                                        #else
+                                        public static partial {prop.Type} {prop.Identifier} => {releasePropValue}
+                                        #endif
+                                    """;
                         })
                         .Where(p => p is not null));
 
@@ -158,18 +177,25 @@ public class EnvVarGenerator : IIncrementalGenerator
                && property.AccessorList.Accessors.First().Kind() == SyntaxKind.GetAccessorDeclaration;
     }
 
-    private static string? GenerateValueFor(PropertyDeclarationSyntax property, string stringfiedValue)
+    private static (string? value, string? comment) GenerateValueFor(PropertyDeclarationSyntax property, string? stringfiedValue)
     {
-        return property.Type.ToString().ToLower() switch
+        if (string.IsNullOrEmpty(stringfiedValue))
         {
-            "string" => $"\"{stringfiedValue}\"",
-            "bool" => bool.TryParse(stringfiedValue, out _) ? stringfiedValue : null,
-            "decimal" => decimal.TryParse(stringfiedValue, out var m) ? $"{m}m" : null,
-            "double" => double.TryParse(stringfiedValue, out var d) ? $"{d}d" : null,
-            "float" => float.TryParse(stringfiedValue, out var f) ? $"{f}f" : null,
-            "int" => int.TryParse(stringfiedValue, out _) ? stringfiedValue : null,
-            "long" => long.TryParse(stringfiedValue, out var l) ? $"{l}L" : null,
-            _ => null
+            return (null, "//value is null");
+        }
+
+        var propType = property.Type.ToString().ToLower();
+
+        return propType switch
+        {
+            "string" => ($"\"{stringfiedValue}\"", null),
+            "bool" => bool.TryParse(stringfiedValue, out _) ? (stringfiedValue, null) : (null, $"//{stringfiedValue} is not a boolean"),
+            "decimal" => decimal.TryParse(stringfiedValue, out var m) ? ($"{m}m", null) : (null, $"//{stringfiedValue} is not a decimal"),
+            "double" => double.TryParse(stringfiedValue, out var d) ? ($"{d}d", null) : (null, $"//{stringfiedValue} is not a double"),
+            "float" => float.TryParse(stringfiedValue, out var f) ? ($"{f}f", null) : (null, $"//{stringfiedValue} is not a float"),
+            "int" => int.TryParse(stringfiedValue, out _) ? (stringfiedValue, null) : (null, $"//{stringfiedValue} is not a integer"),
+            "long" => long.TryParse(stringfiedValue, out var l) ? ($"{l}L", null) : (null, $"//{stringfiedValue} is not a long"),
+            _ => (null, $"//{propType} is not a supported type")
         };
     }
 }
