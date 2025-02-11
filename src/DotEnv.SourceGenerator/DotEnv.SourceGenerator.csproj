@@ -6,15 +6,17 @@
         <Nullable>enable</Nullable>
         <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
         <IsRoslynComponent>true</IsRoslynComponent>
-        <IncludeBuildOutput>false</IncludeBuildOutput>
+        <IncludeBuildOutput>true</IncludeBuildOutput>
         <PackageId>DotEnv.DotNet</PackageId>
         <PackageProjectUrl>https://github.com/igleson/DotNet.DotEnv</PackageProjectUrl>
         <PackageProjectUrl>https://github.com/igleson/DotNet.DotEnv</PackageProjectUrl>
-        <Version>0.0.1</Version>
+        <Version>0.0.4</Version>
         <Autho>https://github.com/igleson</Autho>
         <Description>Supports for a strongly type biding of .env files as static classes</Description>
         <PackageReadmeFile>README.md</PackageReadmeFile> 
-        <PackageLicenseFile>LICENSE</PackageLicenseFile> 
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageTags>analyzers</PackageTags>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
     <ItemGroup>
@@ -25,6 +27,7 @@
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="*" />
         <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
         <None Include="..\..\LICENSE" Pack="true" PackagePath="\"/>
+        <None Include="bin\$(Configuration)\netstandard2.0\DotEnv.SourceGenerator.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
     </ItemGroup>
     
 </Project>
